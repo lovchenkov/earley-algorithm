@@ -9,27 +9,21 @@ After that, you have several options.
 
 * **Run tests**
 
-You just type `./tests` and it will run the tests. Next to you, in build directory, you can find text file `log_test_*` which contains detailed description of algorithm's work.
+You just type `./tests` and it will run the tests. Next to you, in build directory, you can find text files `log_test_*` that contain detailed description of algorithm's work.
 
-**Run program with your data**
+* **Run program with your data**
 
 Type `./earley-algorithm` and then enter your data in following format:
-
+```
 <number of nonterminals> <number of terminals> <number of rules>
-
 <nonterminals>
-
 <terminals>
-
 <rules>
-
 <starting nonterminal>
-
 <number or requests>
-
 <requests>
-
-Each nonterminal should be a capital letter, each terminal should be a lowercase letter, each rule should look like `A->α`(no spaces in crucial!).
+```
+Each nonterminal should be a capital letter, each terminal should be a lowercase letter, each rule should look like `A->α`(no spaces is crucial!).
 
 As an example, input below is correct:
 
