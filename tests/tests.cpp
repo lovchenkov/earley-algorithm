@@ -21,7 +21,7 @@ TEST(EarleyCheck, BracketSequences) {
   char start_nonterminal = 'S';
 
   std::vector<std::string> requests = {"", "()()", "(())()()", "()((()))", ")", "()())"};
-  InputData data{nonterminals.size(), terminals.size(), rules.size(),
+  GrammarAndRequests data{nonterminals.size(), terminals.size(), rules.size(),
                  nonterminals, terminals, rules, start_nonterminal,
                  requests.size(), requests};
 
@@ -32,7 +32,7 @@ TEST(EarleyCheck, BracketSequences) {
   buf = of.rdbuf();
   logger.rdbuf(buf);
 
-  auto answers = GetAnswers(data, logger);
+  auto answers = GetAnswers(data, logger, true);
   std::vector<std::string> expected_answers = {"Yes", "Yes", "Yes", "Yes", "No", "No"};
   ASSERT_EQ(answers, expected_answers);
 }
@@ -45,7 +45,7 @@ TEST(EarleyCheck, SomeGrammar) {
   char start_nonterminal = 'T';
 
   std::vector<std::string> requests = {"", "aab", "bbccc", "cc", "ac", "aabc", "aacb", "ba", "cabb"};
-  InputData data{nonterminals.size(), terminals.size(), rules.size(),
+  GrammarAndRequests data{nonterminals.size(), terminals.size(), rules.size(),
                  nonterminals, terminals, rules, start_nonterminal,
                  requests.size(), requests};
 
@@ -56,7 +56,7 @@ TEST(EarleyCheck, SomeGrammar) {
   buf = of.rdbuf();
   logger.rdbuf(buf);
 
-  auto answers = GetAnswers(data, logger);
+  auto answers = GetAnswers(data, logger, true);
   std::vector<std::string> expected_answers = {"Yes", "Yes", "Yes", "Yes", "Yes", "Yes", "No", "No", "No"};
   ASSERT_EQ(answers, expected_answers);
 }
