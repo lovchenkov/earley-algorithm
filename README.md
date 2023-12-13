@@ -13,7 +13,7 @@ You just type `./tests` and it will run the tests. Next to you, in build directo
 
 * **Run program with your data**
 
-Type `./earley-algorithm` and then enter your data in following format:
+Type `./earley-algorithm (optional flag -v to see logs)` and then enter your data in following format:
 ```
 <number of nonterminals> <number of terminals> <number of rules>
 <nonterminals>
@@ -39,4 +39,4 @@ aabb
 ababaaabbb
 ```
 
-You can also see detailed logs in `log`.
+In case of -v flag you can see detailed logs in `log`.
