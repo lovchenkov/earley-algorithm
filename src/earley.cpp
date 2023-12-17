@@ -108,6 +108,21 @@ class EarleyChecker {
     }
   }
 
+  void CompleteThrough(const Situation& situation,int level_index, std::ostream& logger,
+                       std::deque<Situation>& to_try) {
+    for (const Situation& situation_to_complete : levels[level_index]) {
+      if (situation.GetCurrentSymbol() == situation_to_complete.rule.left) {
+        Situation to_add(situation.GetRule(), situation.shift + 1, situation.prefix_position);
+        if (!levels[level_index].count(to_add)) {
+          levels[level_index].insert(to_add);
+          to_try.push_back(to_add);
+          CompleteThrough(to_add, level_index, logger, to_try);
+          LogSituation(to_add, logger, level_index);
+        }
+      }
+    }
+  }
+
   void Predict(const Situation& situation, int level_index, std::ostream& logger,
                std::deque<Situation>& to_try) {
     if (need_to_log) {
@@ -126,6 +141,7 @@ class EarleyChecker {
           if (!levels[level_index].count(to_add)) {
             to_try.push_back(to_add);
             levels[level_index].insert(to_add);
+            CompleteThrough(to_add, level_index, logger, to_try);
             LogSituation(to_add, logger, level_index);
           }
         }
@@ -151,6 +167,7 @@ class EarleyChecker {
         if (!levels[level_index].count(to_add)) {
           levels[level_index].insert(to_add);
           to_try.push_back(to_add);
+          CompleteThrough(to_add, level_index, logger, to_try);
           LogSituation(to_add, logger, level_index);
         }
       }
