@@ -2,8 +2,8 @@
 #include <fstream>
 #include <sstream>
 
-InputData ReadInput() {
-  InputData data;
+GrammarAndRequests Read() {
+  GrammarAndRequests data;
 
   std::cin >> data.nonterminals_count >> data.terminals_count >> data.rules_count;
 
@@ -37,8 +37,9 @@ InputData ReadInput() {
   return data;
 }
 
-std::vector<std::string> GetAnswers(const InputData& data, std::ostream& logger) {
-  EarleyChecker checker(data);
+std::vector<std::string> GetAnswers(const GrammarAndRequests& data, std::ostream& logger,
+                                    bool need_to_log) {
+  EarleyChecker checker(data, need_to_log);
   std::vector<std::string> answers;
   for (int i = 0; i < data.requests_count; ++i) {
     answers.push_back(checker.isWordInGrammar(data.requests[i], logger) ? "Yes" : "No");

@@ -1,15 +1,21 @@
 #include "main.h"
+#include <cstring>
 
-int main() {
-  InputData data = ReadInput();
+int main(int argc, char* argv[]) {
+  bool need_to_log = (argc > 1 &&  std::strcmp(argv[1], "v"));
+
+  GrammarAndRequests data = Read();
 
   std::ofstream of;
-  of.open("log");
   std::ostream logger(nullptr);
-  std::streambuf *buf;
-  buf = of.rdbuf();
-  logger.rdbuf(buf);
 
-  auto answers = GetAnswers(data, logger);
+  if (need_to_log) {
+  std::streambuf *buf;
+    of.open("log");
+    buf = of.rdbuf();
+    logger.rdbuf(buf);
+  }
+
+  auto answers = GetAnswers(data, logger, need_to_log);
   PrintAnswers(answers);
 }
